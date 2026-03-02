@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ViM – Transporte Escolar, Empresarial y Ruta Tequila | Guadalajara</title>
+  <meta name="description" content="Transporte escolar en La Calma, empresarial nocturno en Distrito La Perla y Misión Agave a Tequila. Seguridad blindada en Guadalajara.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --vim-navy: #1B2A4A;
+      --vim-navy-deep: #131F37;
+      --vim-navy-light: #2A3F6B;
+      --vim-bg: #EDF1F7;
+      --vim-white: #FFFFFF;
+      --vim-gray-50: #F6F8FB;
+      --vim-gray-100: #EDF1F7;
+      --vim-gray-200: #D8DFE9;
+      --vim-gray-300: #B8C2D4;
+      --vim-gray-400: #8A95AB;
+      --vim-gray-500: #6B7894;
+      --vim-gray-600: #4A5568;
+      --vim-gray-700: #374151;
+      --vim-accent: #D4A853;
+      --vim-accent-hover: #C49A45;
+      --vim-green: #22C55E;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--vim-gray-700);
+      background: var(--vim-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--vim-navy);
+      line-height: 1.2;
+    }
+
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000; padding: 1.1rem 2rem;
+      transition: all 0.35s ease; background: transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+      padding: 0.7rem 2rem; box-shadow: 0 1px 20px rgba(27,42,74,0.08);
+    }
+    .navbar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+    .logo-icon { width: 44px; height: 28px; }
+    .logo-icon path { fill: var(--vim-navy); transition: fill 0.3s; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--vim-navy); text-decoration: none; font-size: 0.9rem;
+      font-weight: 500; transition: color 0.3s; position: relative;
+    }
+    .nav-links a:hover { color: var(--vim-navy-light); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--vim-navy); transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--vim-navy) !important; color: white !important;
+      padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600 !important;
+      transition: all 0.3s !important;
+    }
+    .nav-cta:hover {
+      background: var(--vim-navy-light) !important; transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(27,42,74,0.25);
+    }
+    .nav-cta::after { display: none !important; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      width: 26px; height: 2.5px; background: var(--vim-navy);
+      border-radius: 4px; transition: all 0.3s;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--vim-bg); min-height: 100vh;
+      display: flex; align-items: center; position: relative;
+      overflow: hidden; padding: 7rem 2rem 4rem;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 55%; height: 100%;
+      background: linear-gradient(135deg, rgba(27,42,74,0.02) 0%, rgba(27,42,74,0.05) 100%);
+      clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    .hero-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem; align-items: center; position: relative; z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(27,42,74,0.06); border: 1px solid rgba(27,42,74,0.1);
+      color: var(--vim-navy); padding: 0.45rem 1rem; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600; margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 8px; height: 8px;
+      background: var(--vim-green); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero h1 {
+      font-size: clamp(2.4rem,5vw,3.5rem); font-weight: 900;
+      color: var(--vim-navy); margin-bottom: 1.2rem;
+      letter-spacing: -1.5px; line-height: 1.1;
+    }
+    .hero h1 em {
+      font-style: normal; position: relative; display: inline-block;
+    }
+    .hero h1 em::after {
+      content: ''; position: absolute; bottom: 4px; left: 0;
+      width: 100%; height: 12px; background: rgba(212,168,83,0.25);
+      z-index: -1; border-radius: 2px;
+    }
+    .hero-description {
+      font-size: 1.08rem; color: var(--vim-gray-500);
+      margin-bottom: 2rem; max-width: 520px; line-height: 1.75;
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600;
+      font-size: 0.95rem; text-decoration: none; transition: all 0.3s;
+      border: none; cursor: pointer; font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--vim-navy); color: white;
+      box-shadow: 0 4px 20px rgba(27,42,74,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--vim-navy-light); transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(27,42,74,0.3);
+    }
+    .btn-outline {
+      background: transparent; color: var(--vim-navy);
+      border: 2px solid var(--vim-gray-200);
+    }
+    .btn-outline:hover { border-color: var(--vim-navy); background: rgba(27,42,74,0.03); }
+    .hero-trust { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 0.5rem; }
+    .trust-icon {
+      width: 36px; height: 36px; background: var(--vim-white);
+      border-radius: 10px; display: flex; align-items: center;
+      justify-content: center; font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(27,42,74,0.06);
+    }
+    .trust-text { font-size: 0.82rem; color: var(--vim-gray-500); line-height: 1.3; }
+    .trust-text strong { display: block; color: var(--vim-navy); font-size: 0.88rem; }
+    .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+    .hero-van-container { position: relative; width: 100%; max-width: 500px; }
+    .hero-van-bg {
+      width: 100%; aspect-ratio: 4/3; background: rgba(27,42,74,0.04);
+      border-radius: 30px; display: flex; align-items: center;
+      justify-content: center; font-size: 8rem; position: relative; overflow: hidden;
+    }
+    .hero-van-bg::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 40%; background: linear-gradient(to top, rgba(27,42,74,0.06), transparent);
+    }
+    .hero-float-card {
+      position: absolute; background: var(--vim-white); border-radius: 14px;
+      padding: 1rem 1.2rem; box-shadow: 0 8px 30px rgba(27,42,74,0.1);
+      display: flex; align-items: center; gap: 0.7rem; z-index: 3;
+    }
+    .hero-float-card.card-1 { top: 15%; left: -15%; animation: float1 4s ease-in-out infinite; }
+    .hero-float-card.card-2 { bottom: 15%; right: -10%; animation: float2 5s ease-in-out infinite; }
+    @keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+    .float-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .float-icon-green { background: rgba(34,197,94,0.1); }
+    .float-icon-blue { background: rgba(27,42,74,0.08); }
+    .float-text { font-size: 0.78rem; color: var(--vim-gray-500); }
+    .float-text strong { display: block; color: var(--vim-navy); font-size: 0.88rem; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 2rem; }
+    .section-light { background: var(--vim-white); }
+    .section-alt { background: var(--vim-gray-50); }
+    .section-header { text-align: center; max-width: 680px; margin: 0 auto 3.5rem; }
+    .section-label {
+      display: inline-block; color: var(--vim-navy-light); font-weight: 700;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 800;
+      color: var(--vim-navy); margin-bottom: 1rem; letter-spacing: -0.8px;
+    }
+    .section-subtitle { font-size: 1.05rem; color: var(--vim-gray-500); line-height: 1.7; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .service-card {
+      background: var(--vim-white); border-radius: 20px; padding: 2.2rem 2rem;
+      border: 1px solid var(--vim-gray-200); transition: all 0.4s ease;
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: var(--vim-navy);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px); box-shadow: 0 20px 60px rgba(27,42,74,0.08);
+      border-color: transparent;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card.featured {
+      border-color: var(--vim-navy); background: var(--vim-navy);
+    }
+    .service-card.featured h3, .service-card.featured .service-tag { color: white; }
+    .service-card.featured p, .service-card.featured .service-features li { color: rgba(255,255,255,0.75); }
+    .service-card.featured .service-features li::before { color: var(--vim-accent); }
+    .service-card.featured::before { background: var(--vim-accent); }
+    .service-card.featured:hover { box-shadow: 0 20px 60px rgba(27,42,74,0.2); }
+    .service-tag {
+      display: inline-block; background: rgba(212,168,83,0.15); color: var(--vim-accent);
+      font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 50px;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; width: fit-content;
+    }
+    .service-card.featured .service-tag { background: rgba(212,168,83,0.2); }
+    .service-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 1.2rem; background: var(--vim-gray-50);
+    }
+    .service-card.featured .service-icon { background: rgba(255,255,255,0.1); }
+    .service-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.8rem; line-height: 1.3; }
+    .service-card p { color: var(--vim-gray-500); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .service-features { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .service-features li {
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      font-size: 0.85rem; color: var(--vim-gray-600); line-height: 1.5;
+    }
+    .service-features li::before {
+      content: '✓'; color: var(--vim-navy); font-weight: 800;
+      font-size: 0.78rem; margin-top: 2px; flex-shrink: 0;
+    }
+    .service-bottom { margin-top: auto; }
+    .service-price {
+      margin-top: 1.5rem; padding-top: 1.2rem;
+      border-top: 1px solid var(--vim-gray-200);
+    }
+    .service-card.featured .service-price { border-top-color: rgba(255,255,255,0.15); }
+    .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .price-label { font-size: 0.82rem; color: var(--vim-gray-400); }
+    .service-card.featured .price-label { color: rgba(255,255,255,0.5); }
+    .price-value {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem;
+      font-weight: 800; color: var(--vim-navy);
+    }
+    .service-card.featured .price-value { color: var(--vim-accent); }
+    .service-cta {
+      display: block; text-align: center; margin-top: 1.5rem;
+      padding: 0.75rem; border-radius: 10px; font-weight: 600;
+      font-size: 0.9rem; text-decoration: none; transition: all 0.3s;
+    }
+    .service-cta-outline {
+      background: transparent; color: var(--vim-navy); border: 2px solid var(--vim-gray-200);
+    }
+    .service-cta-outline:hover { border-color: var(--vim-navy); background: rgba(27,42,74,0.03); }
+    .service-cta-accent {
+      background: var(--vim-accent); color: var(--vim-navy-deep); border: 2px solid transparent;
+    }
+    .service-cta-accent:hover { background: var(--vim-accent-hover); transform: translateY(-1px); }
+
+    /* SECURITY */
+    .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .security-main-card {
+      background: var(--vim-navy); border-radius: 24px; padding: 2.5rem;
+      color: white; position: relative; overflow: hidden;
+    }
+    .security-main-card::after {
+      content: ''; position: absolute; top: -40%; right: -20%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(212,168,83,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .shield-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(212,168,83,0.15); color: var(--vim-accent);
+      padding: 0.4rem 0.9rem; border-radius: 50px; font-size: 0.78rem;
+      font-weight: 700; margin-bottom: 1.2rem; text-transform: uppercase;
+      letter-spacing: 1px; position: relative; z-index: 1;
+    }
+    .security-main-card h3 {
+      font-size: 1.5rem; font-weight: 800; color: white;
+      margin-bottom: 1rem; position: relative; z-index: 1;
+    }
+    .security-main-card p {
+      color: rgba(255,255,255,0.7); line-height: 1.7;
+      position: relative; z-index: 1; font-size: 0.95rem;
+    }
+    .security-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 1;
+    }
+    .sec-stat { text-align: center; }
+    .sec-stat-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.5rem; font-weight: 800; color: var(--vim-accent);
+    }
+    .sec-stat-label {
+      font-size: 0.7rem; color: rgba(255,255,255,0.45);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;
+    }
+    .security-content h2 {
+      font-size: clamp(1.8rem,3vw,2.3rem); font-weight: 800;
+      color: var(--vim-navy); margin-bottom: 1.2rem; letter-spacing: -0.5px;
+    }
+    .security-content .sec-label {
+      display: inline-block; color: var(--vim-navy-light); font-weight: 700;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 0.8rem;
+    }
+    .security-content > p {
+      color: var(--vim-gray-500); line-height: 1.8; margin-bottom: 1.2rem; font-size: 0.98rem;
+    }
+    .pillars { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+    .pillar-item {
+      display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem;
+      background: var(--vim-white); border-radius: 14px;
+      border: 1px solid var(--vim-gray-200); transition: all 0.3s;
+    }
+    .pillar-item:hover { border-color: var(--vim-navy); box-shadow: 0 4px 15px rgba(27,42,74,0.06); }
+    .pillar-icon {
+      width: 44px; height: 44px; min-width: 44px;
+      background: var(--vim-gray-50); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .pillar-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--vim-navy); margin-bottom: 3px; }
+    .pillar-item p { font-size: 0.84rem; color: var(--vim-gray-400); line-height: 1.5; margin: 0; }
+
+    /* FAQ */
+    .faq-container { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      background: var(--vim-white); border: 1px solid var(--vim-gray-200);
+      border-radius: 14px; margin-bottom: 0.8rem; overflow: hidden; transition: all 0.3s;
+    }
+    .faq-item:hover { border-color: var(--vim-gray-300); }
+    .faq-item.active { border-color: var(--vim-navy); box-shadow: 0 4px 20px rgba(27,42,74,0.06); }
+    .faq-question {
+      width: 100%; padding: 1.2rem 1.5rem; background: none; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.98rem;
+      font-weight: 600; color: var(--vim-navy); text-align: left; gap: 1rem;
+    }
+    .faq-icon {
+      width: 28px; height: 28px; min-width: 28px; border-radius: 8px;
+      background: var(--vim-gray-100); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; transition: all 0.3s; color: var(--vim-gray-500);
+    }
+    .faq-item.active .faq-icon { background: var(--vim-navy); color: white; transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-item.active .faq-answer { max-height: 400px; }
+    .faq-answer-inner { padding: 0 1.5rem 1.3rem; color: var(--vim-gray-500); line-height: 1.7; font-size: 0.92rem; }
+
+    /* CTA */
+    .cta-section {
+      background: var(--vim-navy); padding: 6rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+      width: 1000px; height: 1000px;
+      background: radial-gradient(circle, rgba(212,168,83,0.06) 0%, transparent 60%);
+      border-radius: 50%;
+    }
+    .cta-content { max-width: 680px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+    .cta-content h2 {
+      font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 900;
+      color: white; margin-bottom: 1rem; letter-spacing: -0.5px;
+    }
+    .cta-content p { color: rgba(255,255,255,0.65); font-size: 1.08rem; margin-bottom: 2.5rem; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-whatsapp { background: #25D366; color: white; box-shadow: 0 4px 20px rgba(37,211,102,0.3); }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.4); background: #20BD5A; }
+    .btn-light { background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.15); }
+    .btn-light:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
+    .cta-info { display: flex; justify-content: center; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; }
+    .cta-info-item { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+    .cta-info-item span:first-child { font-size: 1.1rem; }
+
+    /* FOOTER */
+    .footer { background: var(--vim-navy-deep); padding: 2.5rem 2rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto; display: flex;
+      align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+    .footer-logo .logo-icon path { fill: rgba(255,255,255,0.6); }
+    .footer-copy { color: rgba(255,255,255,0.35); font-size: 0.8rem; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--vim-accent); }
+
+    /* WHATSAPP FLOAT */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      width: 58px; height: 58px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.35); z-index: 999;
+      transition: all 0.3s; text-decoration: none; color: white; font-size: 1.6rem;
+    }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+      .security-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+      .hero-description { margin: 0 auto 2rem; }
+      .hero-buttons { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .hero-visual { order: -1; }
+      .hero-van-container { max-width: 320px; margin: 0 auto; }
+      .hero-float-card.card-1 { left: -5%; top: 5%; }
+      .hero-float-card.card-2 { right: -5%; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(20px); padding: 1.5rem 2rem; gap: 1rem;
+        border-top: 1px solid var(--vim-gray-200); box-shadow: 0 10px 30px rgba(27,42,74,0.08);
+      }
+      .nav-links.active { display: flex; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 6rem 1.2rem 3rem; }
+      .section { padding: 4rem 1.2rem; }
+      .cta-section { padding: 4rem 1.2rem; }
+      .cta-buttons, .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-float-card { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <svg style="display:none">
+    <defs>
+      <symbol id="vim-logo" viewBox="0 0 60 36">
+        <path d="M30 0L18 14h8l4-6 4 6h8L30 0zM0 14l12 18 8-12H12l-4 6-4-6H0zm48 0l-4 6-4-6h-8l8 12 12-18h-4zM20 36l10-15 10 15" fill-rule="evenodd"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="logo"><svg class="logo-icon"><use href="#vim-logo"/></svg></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#seguridad">Seguridad</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+        <li><a href="#contacto" class="nav-cta">WhatsApp</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-badge">Corredor López Mateos Sur &bull; GDL</div>
+        <h1>Seguridad blindada y <em>tranquilidad total</em> en cada trayecto</h1>
+        <p class="hero-description">
+          Transporte escolar para familias de La Calma, movilidad ejecutiva y nocturna para empresas del corredor sur, 
+          y Misión Agave: tu conductor sobrio a Tequila y Cantaritos.
+        </p>
+        <div class="hero-buttons">
+          <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20información%20sobre%20el%20servicio%20de%20transporte" class="btn btn-primary" target="_blank">💬 Solicitar información</a>
+          <a href="#servicios" class="btn btn-outline">Conoce nuestros servicios</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <div class="trust-icon">🛡️</div>
+            <div class="trust-text"><strong>Seguro $3 MDP</strong>Gastos médicos mayores</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">🪪</div>
+            <div class="trust-text"><strong>Licencia C5</strong>Choferes certificados</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">📍</div>
+            <div class="trust-text"><strong>GPS activo</strong>Monitoreo en tiempo real</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-van-container">
+          <div class="hero-van-bg">🚐</div>
+          <div class="hero-float-card card-1">
+            <div class="float-icon float-icon-green">✓</div>
+            <div class="float-text"><strong>Gobernada a 60 km/h</strong>Seguridad electrónica</div>
+          </div>
+          <div class="hero-float-card card-2">
+            <div class="float-icon float-icon-blue">⏰</div>
+            <div class="float-text"><strong>Antidoping semanal</strong>Pruebas aleatorias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section section-light" id="servicios">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Nuestros servicios</span>
+        <h2 class="section-title">Tres soluciones, un mismo estándar de seguridad</h2>
+        <p class="section-subtitle">Desde rutas escolares hasta expediciones a Tequila, cada servicio opera con el mismo rigor en seguridad, puntualidad y atención.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-tag">Vecino Seguro</div>
+          <div class="service-icon">🎒</div>
+          <h3>Transporte Escolar — Zona La Calma</h3>
+          <p>La extensión de la excelencia de su colegio en el camino a casa. El tráfico en Av. Patria, Mariano Otero y López Mateos genera estrés que impacta la dinámica familiar. Somos su aliado de confianza.</p>
+          <ul class="service-features">
+            <li>Operadores con Licencia C5 y +10 años de experiencia</li>
+            <li>Capacitación en Inteligencia Emocional</li>
+            <li>Antidoping semanal aleatorio</li>
+            <li>Camioneta 14 pasajeros gobernada a 60 km/h</li>
+            <li>Seguro de $3,000,000 MXN en Gastos Médicos Mayores</li>
+            <li>Radio de 6 km: Altamira, Cervantes, Inglés Hidalgo</li>
+            <li>Monitoreo vía WhatsApp en tiempo real</li>
+          </ul>
+          <div class="service-bottom">
+            <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20info%20del%20transporte%20escolar%20zona%20La%20Calma" class="service-cta service-cta-outline" target="_blank">Solicitar disponibilidad →</a>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-tag">Corporativo</div>
+          <div class="service-icon">🏢</div>
+          <h3>Transporte Empresarial y Nocturno</h3>
+          <p>Optimice el traslado de su activo más valioso: su personal. Transformamos el trayecto al trabajo en un beneficio corporativo. Ruta Colón–Tlajomulco y Retorno Seguro nocturno en La Perla.</p>
+          <ul class="service-features">
+            <li>Ambiente ejecutivo con A/C para llegar listo a producir</li>
+            <li>Cumplimiento NOM-035: reduce riesgo psicosocial</li>
+            <li>Retorno Seguro nocturno: puerta a puerta desde La Perla</li>
+            <li>Hasta 30% más económico que plataformas individuales</li>
+            <li>GPS, gobernación a 60 km/h, seguro de viajero</li>
+            <li>Cristales microperforados: temperatura y privacidad</li>
+            <li>Facturación para empresas</li>
+          </ul>
+          <div class="service-bottom">
+            <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20cotizar%20transporte%20empresarial" class="service-cta service-cta-outline" target="_blank">Solicitar cotización →</a>
+          </div>
+        </div>
+        <div class="service-card featured">
+          <div class="service-tag">🥃 Misión Agave</div>
+          <div class="service-icon">🌵</div>
+          <h3>El Brindis es Tuyo. El Riesgo es Nuestro.</h3>
+          <p>Conductor 100% sobrio con Licencia C5 e Inteligencia Emocional para gestionar grupos en modo celebración. Recolección en toda la ZMG, puerta a puerta.</p>
+          <ul class="service-features">
+            <li>Póliza de $3,000,000 MXN en Gastos Médicos</li>
+            <li>Unidad de 14 pasajeros refrigerada</li>
+            <li>8 horas de espera activa incluidas</li>
+            <li>Mantenimiento semanal y neumáticos renovados</li>
+          </ul>
+          <div class="service-bottom">
+            <div class="service-price">
+              <div class="price-row">
+                <span class="price-label">Cantaritos Amatitán (redondo)</span>
+                <span class="price-value">$3,800</span>
+              </div>
+              <div class="price-row">
+                <span class="price-label">Tequila Pueblo Mágico (redondo)</span>
+                <span class="price-value">$4,500</span>
+              </div>
+            </div>
+            <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20reservar%20Misión%20Agave" class="service-cta service-cta-accent" target="_blank">Reservar Misión Agave →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEGURIDAD -->
+  <section class="section section-alt" id="seguridad">
+    <div class="container">
+      <div class="security-grid">
+        <div class="security-visual">
+          <div class="security-main-card">
+            <div class="shield-badge">🛡️ Blindaje de Seguridad</div>
+            <h3>Somos Movilidad Anti-Estrés</h3>
+            <p>No somos un transporte convencional. Hemos diseñado un protocolo de seguridad de clase mundial. Mientras la mayoría de los transportistas descuidan sus unidades, nosotros aplicamos el mismo rigor preventivo los 7 días de la semana. Tu seguridad no descansa los sábados.</p>
+            <div class="security-stats">
+              <div class="sec-stat">
+                <div class="sec-stat-number">$3M</div>
+                <div class="sec-stat-label">Póliza GMM</div>
+              </div>
+              <div class="sec-stat">
+                <div class="sec-stat-number">60</div>
+                <div class="sec-stat-label">km/h máx.</div>
+              </div>
+              <div class="sec-stat">
+                <div class="sec-stat-number">C5</div>
+                <div class="sec-stat-label">Licencia</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="security-content">
+          <span class="sec-label">Nuestro estándar</span>
+          <h2>Tres pilares que nos hacen diferentes</h2>
+          <p>No vendemos fletes. Cada kilómetro que recorremos está respaldado por protocolos que ningún servicio informal puede igualar.</p>
+          <div class="pillars">
+            <div class="pillar-item">
+              <div class="pillar-icon">👨‍✈️</div>
+              <div>
+                <h4>Operadores de Élite</h4>
+                <p>Licencia C5, +10 años de experiencia, capacitación en Inteligencia Emocional y antidoping semanal aleatorio.</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <div class="pillar-icon">🚐</div>
+              <div>
+                <h4>Unidad Certificada</h4>
+                <p>Gobernada electrónicamente a 60 km/h. Póliza de cobertura amplia con extensión de GMM de hasta $3,000,000 MXN por evento.</p>
+              </div>
+            </div>
+            <div class="pillar-item">
+              <div class="pillar-icon">🔧</div>
+              <div>
+                <h4>Mantenimiento Obsesivo</h4>
+                <p>Bitácora semanal. Renovación de neumáticos cada 2,500 km para agarre perfecto en cualquier condición climática.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-light" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Todo lo que necesitas saber</h2>
+        <p class="section-subtitle">Si tu duda no está aquí, escríbenos por WhatsApp y te respondemos en menos de 2 horas.</p>
+      </div>
+      <div class="faq-container">
+        <div class="faq-item active">
+          <button class="faq-question">¿Qué zonas cubren con el transporte escolar?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Nos especializamos en un radio de 6 km a la redonda de La Calma, atendiendo instituciones como el Colegio Altamira, Cervantes e Inglés Hidalgo. Cubrimos La Calma, Chapalita, El Colli, Las Águilas, Plaza del Sol, Distrito la Perla y corredor López Mateos Sur hasta Plazas Outlet. Rutas cortas donde ningún niño pasa tiempo excesivo en la unidad, llegando directo a la puerta de su hogar.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Qué garantías de seguridad ofrecen?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Nuestras unidades están gobernadas electrónicamente a 60 km/h, cuentan con GPS y una póliza de seguro de cobertura amplia con extensión de Gastos Médicos Mayores de hasta $3,000,000 MXN por evento. Los choferes tienen Licencia Tipo C5, más de 10 años de experiencia, capacitación en Inteligencia Emocional y se les aplican exámenes antidoping semanales aleatorios.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Cómo funciona el transporte nocturno en Distrito La Perla?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Nuestro servicio "Retorno Seguro" es transporte puerta a puerta para personal que sale después de las 10:00 PM de restaurantes y oficinas en Distrito La Perla. Eliminamos la exposición al peligro en paradas de camión o esperas de plataformas digitales. Una tarifa fija por vuelta de 14 pasajeros es hasta un 30% más económica que servicios de plataforma individuales.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Qué incluye la Misión Agave y cuánto cuesta?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Misión Agave incluye recolección en toda la ZMG (puerta a puerta), traslado en unidad de 14 pasajeros con chofer certificado C5 100% sobrio y 8 horas de espera activa. Cantaritos Amatitán: $3,800 MXN viaje redondo. Tequila Pueblo Mágico: $4,500 MXN viaje redondo. Ambos incluyen póliza de $3,000,000 MXN en Gastos Médicos.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Pueden facturar el servicio?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Sí, ofrecemos facturación para todos nuestros servicios: escolar, empresarial y Misión Agave. Para empresas ofrecemos contratos mensuales con facturación recurrente.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Qué tan diferente es esto de un Uber a Tequila?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Con plataformas digitales obtienes un servicio incierto, costoso y sin garantía de regreso. Con Misión Agave obtienes 14 lugares, 8 horas de espera activa, conductor certificado C5, unidad gobernada, seguro de $3 MDP y la certeza de que tu transporte estará listo y esperando tu señal para el retorno. Tu conductor no bebe, tú sí puedes.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contacto">
+    <div class="cta-content">
+      <h2>Asegura tu lugar en la ruta más segura de Guadalajara</h2>
+      <p>Ya sea para tu hijo, tu equipo de trabajo o tu próxima salida a Tequila, escríbenos hoy y recibe una propuesta personalizada.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20cotizar%20el%20servicio%20de%20transporte" class="btn btn-whatsapp" target="_blank">💬 Escribir por WhatsApp</a>
+        <a href="tel:+5213351209946" class="btn btn-light">📞 33 5120 9946</a>
+      </div>
+      <div class="cta-info">
+        <div class="cta-info-item"><span>📍</span> Zona Sur, Guadalajara</div>
+        <div class="cta-info-item"><span>⏰</span> Respuesta en &lt;2 horas</div>
+        <div class="cta-info-item"><span>📄</span> Facturación disponible</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="#" class="footer-logo"><svg class="logo-icon"><use href="#vim-logo"/></svg></a>
+      <ul class="footer-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#seguridad">Seguridad</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 ViM. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20información%20sobre%20el%20servicio%20de%20transporte" class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+
+  <script>
+    const navbar=document.getElementById('navbar');
+    window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+    const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');
+    hamburger.addEventListener('click',()=>navLinks.classList.toggle('active'));
+    navLinks.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>navLinks.classList.remove('active')));
+    document.querySelectorAll('.faq-question').forEach(b=>{
+      b.addEventListener('click',()=>{
+        const i=b.parentElement,w=i.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('active'));
+        if(!w)i.classList.add('active');
+      });
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        const t=document.querySelector(this.getAttribute('href'));
+        if(t){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'});}
+      });
+    });
+  </script>
+</body>
+</html>
