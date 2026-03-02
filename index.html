@@ -411,7 +411,7 @@
       align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
     }
     .footer-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-    .footer-logo .logo-icon path { fill: rgba(255,255,255,0.6); }
+    .footer-logo .logo-icon path { fill: rgba(255,255,255,0.7); }
     .footer-copy { color: rgba(255,255,255,0.35); font-size: 0.8rem; }
     .footer-links { display: flex; gap: 1.5rem; list-style: none; }
     .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
@@ -461,18 +461,10 @@
 </head>
 <body>
 
-  <svg style="display:none">
-    <defs>
-      <symbol id="vim-logo" viewBox="0 0 60 36">
-        <path d="M30 0L18 14h8l4-6 4 6h8L30 0zM0 14l12 18 8-12H12l-4 6-4-6H0zm48 0l-4 6-4-6h-8l8 12 12-18h-4zM20 36l10-15 10 15" fill-rule="evenodd"/>
-      </symbol>
-    </defs>
-  </svg>
-
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
-      <a href="#" class="logo"><svg class="logo-icon"><use href="#vim-logo"/></svg></a>
+      <a href="#" class="logo"><svg class="logo-icon" viewBox="0 0 60 36"><path d="M0,16 C4,6 14,4 22,10 L30,34 L38,10 C46,4 56,6 60,16 C56,8 46,7 40,12 L30,26 L20,12 C14,7 4,8 0,16Z" fill="#1B2A4A"/></svg></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#seguridad">Seguridad</a></li>
@@ -716,7 +708,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <a href="#" class="footer-logo"><svg class="logo-icon"><use href="#vim-logo"/></svg></a>
+      <a href="#" class="footer-logo"><svg class="logo-icon" viewBox="0 0 60 36"><path d="M0,16 C4,6 14,4 22,10 L30,34 L38,10 C46,4 56,6 60,16 C56,8 46,7 40,12 L30,26 L20,12 C14,7 4,8 0,16Z" fill="rgba(255,255,255,0.7)"/></svg></a>
       <ul class="footer-links">
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#seguridad">Seguridad</a></li>
