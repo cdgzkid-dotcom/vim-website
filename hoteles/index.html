@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tequila Day Pass – ViM Transporte | Hoteles GDL</title>
+  <meta name="description" content="Tequila Day Pass para hoteles en Guadalajara. Destilería, cantaritos y regreso seguro. Capitán certificado, 14 pax, puerta a puerta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --vim-navy: #1B2A4A;
+      --vim-navy-deep: #131F37;
+      --vim-navy-light: #2A3F6B;
+      --vim-bg: #EDF1F7;
+      --vim-white: #FFFFFF;
+      --vim-gray-50: #F6F8FB;
+      --vim-gray-100: #EDF1F7;
+      --vim-gray-200: #D8DFE9;
+      --vim-gray-300: #B8C2D4;
+      --vim-gray-400: #8A95AB;
+      --vim-gray-500: #6B7894;
+      --vim-gray-600: #4A5568;
+      --vim-gray-700: #374151;
+      --vim-accent: #D4A853;
+      --vim-accent-hover: #C49A45;
+      --vim-green: #22C55E;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--vim-gray-700);
+      background: var(--vim-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--vim-navy);
+      line-height: 1.2;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: var(--vim-navy-deep);
+      padding: 0.6rem 2rem;
+      text-align: center;
+    }
+    .topbar-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    }
+    .topbar span { color: rgba(255,255,255,0.55); font-size: 0.82rem; }
+    .topbar a {
+      color: var(--vim-accent); font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .topbar a:hover { opacity: 0.8; }
+
+    /* HERO */
+    .hero {
+      background: var(--vim-navy);
+      padding: 5rem 2rem 4rem;
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(212,168,83,0.08) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(212,168,83,0.15); color: var(--vim-accent);
+      padding: 0.45rem 1.1rem; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 1.8rem; position: relative; z-index: 2;
+    }
+    .hero-tag::before {
+      content: ''; width: 7px; height: 7px;
+      background: var(--vim-accent); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 900; color: var(--vim-white);
+      letter-spacing: -1.5px; margin-bottom: 1rem;
+      position: relative; z-index: 2;
+    }
+    .hero h1 span {
+      color: var(--vim-accent);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.75);
+      max-width: 600px; margin: 0 auto 2.5rem;
+      line-height: 1.6; position: relative; z-index: 2;
+    }
+    .hero-sub strong { color: var(--vim-white); font-weight: 700; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: #25D366; color: white;
+      padding: 1rem 2.2rem; border-radius: 12px;
+      font-weight: 700; font-size: 1.05rem; text-decoration: none;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+      transition: all 0.3s; position: relative; z-index: 2;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.45); background: #20BD5A; }
+    .hero-meta {
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      margin-top: 3rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      position: relative; z-index: 2;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.5); font-size: 0.85rem;
+    }
+    .hero-meta-item span:first-child { font-size: 1.1rem; }
+
+    /* INTRO */
+    .intro {
+      background: var(--vim-bg);
+      padding: 4rem 2rem;
+    }
+    .intro-inner {
+      max-width: 760px; margin: 0 auto; text-align: center;
+    }
+    .section-label {
+      display: inline-block; color: var(--vim-navy-light); font-weight: 700;
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 0.8rem;
+    }
+    .intro h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; margin-bottom: 1.2rem; letter-spacing: -0.5px;
+    }
+    .intro p {
+      color: var(--vim-gray-500); font-size: 1.05rem; line-height: 1.8;
+    }
+
+    /* ITINERARIO */
+    .itinerary {
+      padding: 5rem 2rem;
+      background: var(--vim-white);
+    }
+    .itinerary-inner { max-width: 900px; margin: 0 auto; }
+    .itinerary-header { text-align: center; margin-bottom: 3.5rem; }
+    .itinerary-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.5px; margin-top: 0.5rem;
+    }
+    .stops { display: flex; flex-direction: column; gap: 2rem; }
+    .stop {
+      display: grid; grid-template-columns: 72px 1fr;
+      gap: 1.5rem; align-items: start;
+    }
+    .stop-number {
+      width: 72px; height: 72px; min-width: 72px;
+      background: var(--vim-navy); border-radius: 20px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--vim-accent); font-weight: 900;
+    }
+    .stop-number .num { font-size: 1.5rem; line-height: 1; }
+    .stop-number .label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.45); }
+    .stop-body {
+      background: var(--vim-gray-50); border-radius: 20px;
+      padding: 1.8rem 2rem; border: 1px solid var(--vim-gray-200);
+      transition: all 0.3s;
+    }
+    .stop-body:hover { border-color: var(--vim-navy); box-shadow: 0 8px 30px rgba(27,42,74,0.06); }
+    .stop-tag {
+      display: inline-block; background: rgba(212,168,83,0.15); color: var(--vim-accent);
+      font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 50px;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.7rem;
+    }
+    .stop-body h3 {
+      font-size: 1.1rem; font-weight: 800; margin-bottom: 0.6rem; color: var(--vim-navy);
+    }
+    .stop-body > p {
+      color: var(--vim-gray-500); font-size: 0.92rem; line-height: 1.7; margin-bottom: 0.8rem;
+    }
+    .stop-duration {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--vim-gray-400); font-size: 0.8rem; font-weight: 500;
+      margin-top: 0.2rem;
+    }
+    .stop-list {
+      list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.8rem;
+    }
+    .stop-list li {
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      font-size: 0.88rem; color: var(--vim-gray-600); line-height: 1.5;
+    }
+    .stop-list li::before {
+      content: '✓'; color: var(--vim-accent); font-weight: 800;
+      font-size: 0.78rem; margin-top: 2px; flex-shrink: 0;
+    }
+    /* Receta cantarito */
+    .recipe-box {
+      background: var(--vim-navy); border-radius: 14px;
+      padding: 1.2rem 1.4rem; margin-top: 1rem;
+    }
+    .recipe-title {
+      color: var(--vim-accent); font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem;
+    }
+    .recipe-list {
+      list-style: none; display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    .recipe-list li {
+      color: rgba(255,255,255,0.75); font-size: 0.86rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .recipe-list li::before { content: '🥃'; font-size: 0.75rem; }
+
+    /* DRIVER */
+    .driver {
+      background: var(--vim-navy);
+      padding: 5rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .driver::before {
+      content: '';
+      position: absolute; bottom: -30%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(212,168,83,0.07) 0%, transparent 65%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .driver-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+    .driver-header { margin-bottom: 2.5rem; }
+    .driver-header .section-label { color: var(--vim-accent); }
+    .driver-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800; color: var(--vim-white); letter-spacing: -0.5px;
+    }
+    .driver-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .driver-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 1.4rem 1.5rem;
+      transition: all 0.3s;
+    }
+    .driver-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(212,168,83,0.3);
+    }
+    .driver-card-icon {
+      font-size: 1.6rem; margin-bottom: 0.7rem;
+    }
+    .driver-card h4 {
+      color: var(--vim-white); font-size: 0.95rem;
+      font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .driver-card p {
+      color: rgba(255,255,255,0.55); font-size: 0.84rem; line-height: 1.6;
+    }
+
+    /* PRECIO */
+    .pricing {
+      background: var(--vim-bg);
+      padding: 5rem 2rem;
+    }
+    .pricing-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .pricing h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; letter-spacing: -0.5px; margin: 0.5rem 0 0.8rem;
+    }
+    .pricing-subtitle {
+      color: var(--vim-gray-500); font-size: 0.95rem; margin-bottom: 2.5rem;
+    }
+    .price-card {
+      background: var(--vim-white); border-radius: 24px;
+      padding: 2.5rem 2rem; border: 2px solid var(--vim-navy);
+      box-shadow: 0 12px 40px rgba(27,42,74,0.08);
+    }
+    .price-card-label {
+      display: inline-block; background: rgba(212,168,83,0.15); color: var(--vim-accent);
+      font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 50px;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;
+    }
+    .price-card h3 {
+      font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem;
+    }
+    .price-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 3rem; font-weight: 900; color: var(--vim-navy);
+      letter-spacing: -2px; line-height: 1;
+    }
+    .price-value span {
+      font-size: 1.2rem; font-weight: 600; color: var(--vim-gray-400); letter-spacing: 0;
+    }
+    .price-desc {
+      color: var(--vim-gray-500); font-size: 0.88rem; margin: 0.5rem 0 1.8rem;
+    }
+    .price-features {
+      list-style: none; display: flex; flex-direction: column;
+      gap: 0.5rem; text-align: left; margin-bottom: 2rem;
+    }
+    .price-features li {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      font-size: 0.9rem; color: var(--vim-gray-600);
+    }
+    .price-features li::before {
+      content: '✓'; color: var(--vim-green); font-weight: 800;
+      font-size: 0.8rem; margin-top: 2px; flex-shrink: 0;
+    }
+
+    /* CTA FINAL */
+    .cta-final {
+      background: var(--vim-navy-deep);
+      padding: 5rem 2rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-final::before {
+      content: '';
+      position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+      width: 1000px; height: 1000px;
+      background: radial-gradient(circle, rgba(212,168,83,0.05) 0%, transparent 60%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .cta-final-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 2; }
+    .cta-final h2 {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 900; color: var(--vim-white);
+      letter-spacing: -0.5px; margin-bottom: 0.8rem;
+    }
+    .cta-final p {
+      color: rgba(255,255,255,0.55); font-size: 1rem;
+      line-height: 1.7; margin-bottom: 2.5rem;
+    }
+    .cta-final .btn-wa {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: #25D366; color: white;
+      padding: 1.1rem 2.5rem; border-radius: 12px;
+      font-weight: 700; font-size: 1.08rem; text-decoration: none;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+      transition: all 0.3s;
+    }
+    .cta-final .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.45); background: #20BD5A; }
+    .cta-note {
+      margin-top: 1.2rem; color: rgba(255,255,255,0.35);
+      font-size: 0.82rem;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--vim-navy-deep);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 2rem;
+    }
+    .footer-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+    .footer-copy { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+    .footer-link { color: rgba(255,255,255,0.4); font-size: 0.82rem; text-decoration: none; transition: color 0.3s; }
+    .footer-link:hover { color: var(--vim-accent); }
+
+    /* WA FLOAT */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      width: 58px; height: 58px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.35); z-index: 999;
+      transition: all 0.3s; text-decoration: none; color: white; font-size: 1.6rem;
+    }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .hero { padding: 4rem 1.2rem 3rem; }
+      .intro, .itinerary, .driver, .pricing, .cta-final { padding: 3.5rem 1.2rem; }
+      .stop { grid-template-columns: 1fr; }
+      .stop-number { width: 52px; height: 52px; border-radius: 14px; }
+      .topbar-inner { flex-direction: column; gap: 0.2rem; }
+      .hero-meta { gap: 1rem; }
+      .driver-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>¿Eres hotel o concierge? </span>
+      <a href="https://wa.me/5213351209946?text=Hola%2C%20soy%20concierge%20de%20hotel%20y%20quiero%20información%20sobre%20el%20Tequila%20Day%20Pass" target="_blank">Contáctanos para comisiones y tarifas especiales →</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">🥃 Experiencia Exclusiva · Tequila Day Pass</div>
+    <h1>Inmunidad total en<br><span>la tierra del agave</span></h1>
+    <p class="hero-sub">
+      La <strong>DIVERSIÓN</strong> es tuya. La <strong>RESPONSABILIDAD</strong> de la seguridad es nuestra.
+    </p>
+    <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20reservar%20mi%20Tequila%20Day%20Pass" class="hero-cta" target="_blank">
+      💬 Reservar mi Tequila Day Pass
+    </a>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span>🕐</span> 10 horas de expedición</div>
+      <div class="hero-meta-item"><span>👥</span> Hasta 14 pasajeros</div>
+      <div class="hero-meta-item"><span>🚐</span> Puerta a puerta en ZMG</div>
+      <div class="hero-meta-item"><span>🛡️</span> Capitán certificado C5</div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-inner">
+      <span class="section-label">¿Por qué ViM?</span>
+      <h2>No vendemos viajes.<br>Garantizamos libertad total.</h2>
+      <p>En la capital del Tequila, la diferencia entre una experiencia legendaria y una tragedia logística radica en quién toma el volante. Te garantizamos la libertad de disfrutar sin límites mientras nosotros operamos con precisión quirúrgica.</p>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section class="itinerary">
+    <div class="itinerary-inner">
+      <div class="itinerary-header">
+        <span class="section-label">El itinerario</span>
+        <h2>Una expedición a los sentidos</h2>
+      </div>
+      <div class="stops">
+
+        <!-- PARADA 1 -->
+        <div class="stop">
+          <div class="stop-number">
+            <div class="num">01</div>
+            <div class="label">Parada</div>
+          </div>
+          <div class="stop-body">
+            <span class="stop-tag">🍳 Gastronomía</span>
+            <h3>Despertar Tepatío: Desayuno con "Don Jacinto"</h3>
+            <p>Nuestra misión comienza en el corazón del Pueblo Mágico de Tequila. Para preparar el cuerpo, visitamos a Don Jacinto, donde probarás la birria más deliciosa y las tradicionales tortas ahogadas que le han dado fama a la región.</p>
+            <div class="stop-duration">⏱ 1 hora de inmersión gastronómica local</div>
+          </div>
+        </div>
+
+        <!-- PARADA 2 -->
+        <div class="stop">
+          <div class="stop-number">
+            <div class="num">02</div>
+            <div class="label">Parada</div>
+          </div>
+          <div class="stop-body">
+            <span class="stop-tag">🌵 Destilería</span>
+            <h3>El alma del agave: Destilería "3 Mujeres"</h3>
+            <p>Entramos al origen. Una experiencia diseñada para capturar la esencia del tequila desde la tierra hasta la copa.</p>
+            <ul class="stop-list">
+              <li><strong>Campos de Agave:</strong> Captura momentos inolvidables en un entorno natural espectacular.</li>
+              <li><strong>Proceso Artesanal:</strong> Observa cómo se transforma el agave en oro líquido mediante métodos que honran la tradición.</li>
+              <li><strong>Degustación Guiada:</strong> Saborea la excelencia en una cata diseñada para despertar tus sentidos.</li>
+              <li><strong>Cava Subterránea:</strong> Explora una de las cuevas de añejamiento más grandes de México; un escenario místico para fotografías únicas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PARADA 3 -->
+        <div class="stop">
+          <div class="stop-number">
+            <div class="num">03</div>
+            <div class="label">Parada</div>
+          </div>
+          <div class="stop-body">
+            <span class="stop-tag">🎉 El epicentro</span>
+            <h3>El epicentro de la fiesta: Cantaritos "El Güero" #1</h3>
+            <p>Cantaritos El Güero es leyenda, y tú estás invitado. Prueba el tradicional Cantarito Gigante con receta secreta.</p>
+            <div class="recipe-box">
+              <div class="recipe-title">🥃 Receta del Cantarito Gigante</div>
+              <ul class="recipe-list">
+                <li>Hielos (de los que no emborrachan)</li>
+                <li>Sal con estilo (si no, no pega)</li>
+                <li>1 kg de limones recién exprimidos</li>
+                <li>Jarra de jugo de naranja natural</li>
+                <li>2.5 litros de refresco de lima-limón</li>
+                <li>Dos botellas de Tequila a tu elección (pa' que amarre)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DRIVER CERO RIESGO -->
+  <section class="driver">
+    <div class="driver-inner">
+      <div class="driver-header">
+        <span class="section-label">Nuestra operativa</span>
+        <h2>Driver Cero Riesgo</h2>
+      </div>
+      <div class="driver-grid">
+        <div class="driver-card">
+          <div class="driver-card-icon">👨‍✈️</div>
+          <h4>Capitán Certificado</h4>
+          <p>Operador con Licencia C5 y más de 10 años de experiencia específica en la ruta tequilera.</p>
+        </div>
+        <div class="driver-card">
+          <div class="driver-card-icon">🧠</div>
+          <h4>Inteligencia Emocional</h4>
+          <p>Personal capacitado para gestionar grupos en modo celebración con cortesía, respeto y autoridad.</p>
+        </div>
+        <div class="driver-card">
+          <div class="driver-card-icon">🛡️</div>
+          <h4>Blindaje de Seguridad</h4>
+          <p>Póliza de Gastos Médicos Mayores activa y bitácora de mantenimiento semanal rigurosa.</p>
+        </div>
+        <div class="driver-card">
+          <div class="driver-card-icon">📍</div>
+          <h4>Puerta a Puerta ZMG</h4>
+          <p>Recolección y regreso en la puerta de su hotel en toda la ZMG: Zapopan, GDL, Tlaquepaque, Tonalá.</p>
+        </div>
+        <div class="driver-card">
+          <div class="driver-card-icon">🚐</div>
+          <h4>Unidad Premium</h4>
+          <p>Camioneta de 14 pasajeros, climatizada, impecable y con 8 horas de espera activa incluidas.</p>
+        </div>
+        <div class="driver-card">
+          <div class="driver-card-icon">📋</div>
+          <h4>Facturación Disponible</h4>
+          <p>Emitimos factura para hoteles y agencias. Tarifas especiales para concierge y grupos recurrentes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRECIO -->
+  <section class="pricing">
+    <div class="pricing-inner">
+      <span class="section-label">Inversión</span>
+      <h2>Valor de la expedición</h2>
+      <p class="pricing-subtitle">Precio por unidad completa. Sin costo ocultos.</p>
+      <div class="price-card">
+        <span class="price-card-label">🥃 Ruta Tequila</span>
+        <h3>Expedición Pueblo Mágico</h3>
+        <div class="price-value"><span>$</span>4,500<span> MXN</span></div>
+        <p class="price-desc">Viaje redondo · hasta 14 pasajeros</p>
+        <ul class="price-features">
+          <li>Recolección puerta a puerta en toda la ZMG</li>
+          <li>10 horas de expedición con 3 paradas</li>
+          <li>Capitán certificado C5 · 100% sobrio</li>
+          <li>Unidad climatizada de 14 pasajeros</li>
+          <li>8 horas de espera activa incluidas</li>
+          <li>Póliza de Gastos Médicos Mayores</li>
+          <li>Facturación disponible</li>
+        </ul>
+        <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20reservar%20mi%20Tequila%20Day%20Pass%20por%20%244%2C500%20MXN" class="hero-cta" style="width:100%;justify-content:center;" target="_blank">
+          💬 Reservar mi Tequila Day Pass
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="cta-final-inner">
+      <h2>Asegura tu fecha.<br>El brindis es tuyo, el camino es nuestro.</h2>
+      <p>Cupo limitado por fecha. Bloquea tu expedición con anticipación y garantiza la experiencia que tus huéspedes merecen.</p>
+      <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20reservar%20mi%20Tequila%20Day%20Pass" class="btn-wa" target="_blank">
+        💬 RESERVAR MI TEQUILA DAY PASS POR WHATSAPP
+      </a>
+      <p class="cta-note">📞 También puedes llamar al 33 5120 9946 · Respuesta en menos de 2 horas</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="https://vim.com.mx" class="footer-logo">
+        <img src="../assets/img/logo-footer.png" alt="ViM" style="height:32px;opacity:0.6;">
+      </a>
+      <p class="footer-copy">© 2026 ViM Transporte. Todos los derechos reservados.</p>
+      <a href="https://vim.com.mx" class="footer-link">← Volver al sitio principal</a>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5213351209946?text=Hola%2C%20quiero%20reservar%20mi%20Tequila%20Day%20Pass" class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+
+</body>
+</html>
