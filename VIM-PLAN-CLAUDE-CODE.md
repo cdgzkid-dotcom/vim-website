@@ -203,6 +203,54 @@ git add . && git commit -m "cambio" && git push
 
 ---
 
+## Sesión Claude Code — 2026-03-05
+
+### ✅ Lo que se hizo en esta sesión
+
+#### 1. HTTPS forzado en GitHub Pages
+- Se verificó que el certificado SSL de `vim.com.mx` ya estaba aprobado (`approved`, expira 2026-06-01)
+- Se activó `https_enforced: true` vía API de GitHub
+- Resultado: todo tráfico `http://` redirige automáticamente a `https://`
+```bash
+gh api repos/cdgzkid-dotcom/vim-website/pages -X PUT --field https_enforced=true
+```
+
+#### 2. Imagen real de la van en el Hero
+- Se reemplazó el emoji `🚐` en el hero por la imagen real `vanTRANSIT.png`
+- Archivo copiado de `~/Downloads/vanTRANSIT.png` → `assets/img/van-portada.png`
+- CSS actualizado: `object-fit: contain` para que la van se vea completa dentro del contenedor
+- Commit: `f4beeb8`
+
+#### 3. Landing Page para Hoteles — `/hoteles`
+- Creada `hoteles/index.html` accesible en `vim.com.mx/hoteles`
+- Diseño consistente con el sitio principal (misma paleta, fuentes y sistema)
+- Secciones:
+  - **Topbar** → Aviso para concierge/hoteles con link de contacto
+  - **Hero** → "Inmunidad total en la tierra del agave" + CTA WhatsApp + 4 meta-datos
+  - **Intro** → Diferenciador: "No vendemos viajes. Garantizamos libertad total."
+  - **Itinerario** (3 paradas):
+    - 🍳 Parada 01 — Desayuno con Don Jacinto (birria + tortas ahogadas)
+    - 🌵 Parada 02 — Destilería 3 Mujeres (campos de agave, cata, cava subterránea)
+    - 🎉 Parada 03 — Cantaritos El Güero #1 (con receta visual del cantarito gigante)
+  - **Driver Cero Riesgo** → 6 cards: Capitán C5, Inteligencia Emocional, Blindaje, Puerta a Puerta ZMG, Unidad Premium, Facturación
+  - **Precio** → $4,500 MXN · viaje redondo · hasta 14 pax · todo incluido
+  - **CTA Final** → "Asegura tu fecha. El brindis es tuyo, el camino es nuestro."
+- Commit: `0e95076`
+
+#### 4. Servidor de desarrollo configurado
+- Agregado `vim-website` a `~/.claude/launch.json` en puerto `3006`
+- Preview local disponible en `http://localhost:3006`
+
+#### 5. Deploy en producción
+- Ambas páginas publicadas en `main` → GitHub Pages desplegó automáticamente
+- URLs activas:
+  - `https://vim.com.mx`
+  - `https://vim.com.mx/hoteles`
+  - `https://cdgzkid-dotcom.github.io/vim-website/` (prueba)
+  - `https://cdgzkid-dotcom.github.io/vim-website/hoteles/` (prueba)
+
+---
+
 ## Checklist de Validación
 
 - [ ] `index.html` existe y es el diseño aprobado
