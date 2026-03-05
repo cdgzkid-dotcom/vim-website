@@ -170,7 +170,10 @@
     .hero-van-bg {
       width: 100%; aspect-ratio: 4/3; background: rgba(27,42,74,0.04);
       border-radius: 30px; display: flex; align-items: center;
-      justify-content: center; font-size: 8rem; position: relative; overflow: hidden;
+      justify-content: center; position: relative; overflow: hidden;
+    }
+    .hero-van-bg img {
+      width: 100%; height: 100%; object-fit: contain;
     }
     .hero-van-bg::before {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0;
@@ -490,7 +493,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-van-container">
-          <div class="hero-van-bg">🚐</div>
+          <div class="hero-van-bg"><img src="assets/img/van-portada.png" alt="Ford Transit ViM"></div>
           <div class="hero-float-card card-1">
             <div class="float-icon float-icon-green">✓</div>
             <div class="float-text"><strong>Gobernada a 70 km/h</strong>Seguridad electrónica</div>
